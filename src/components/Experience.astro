@@ -1,0 +1,81 @@
+---
+interface Role {
+  company: string;
+  title: string;
+  period: string;
+  points: string[];
+}
+
+const roles: Role[] = [
+  {
+    company: 'Skyworks Solutions',
+    title: 'Digital Analytics & Content Operations Co-op',
+    period: 'Jan 2025 – Present',
+    points: [
+      'Built a privacy-first analytics pipeline that generates 0-100 Content Performance Score (CPS) for Skyworks web pages using cookie-lite engagement metrics (scroll depth, dwell time, bounce, exit rate).',
+    ],
+  },
+  {
+    company: 'Industrial Technology Research Institute (ITRI)',
+    title: 'Data Analyst Intern',
+    period: 'Jul 2025 – Aug 2025',
+    points: [
+      'Designed an NLP pipeline for large-scale text data, including data cleaning, feature extraction, and structured signal generation.',
+    ],
+  },
+  {
+    company: 'The Floc App',
+    title: 'Data Science Intern',
+    period: 'Jul 2025 – Aug 2025',
+    points: [
+      'Assisted in building iOS-based social matchmaking app for Gen Z users.',
+    ],
+  },
+  {
+    company: 'Maxzone Auto Parts Corporation',
+    title: 'Data Engineering Intern',
+    period: 'Jun 2024 – Sep 2024',
+    points: [
+      'Automated reports and supported data operations across departments.',
+    ],
+  },
+  {
+    company: 'Code Ninjas',
+    title: 'Coding Instructor',
+    period: 'Jun 2021 – Jul 2021',
+    points: [
+      'Taught coding fundamentals and led a stop-motion animation workshop for students.',
+    ],
+  },
+];
+---
+
+<section id="experience" class="max-w-2xl mx-auto px-6 py-16">
+  <h2 class="text-sm font-medium uppercase tracking-widest text-muted mb-10">
+    Experience
+  </h2>
+  <div class="flex flex-col gap-8">
+    {roles.map(role => (
+      <div class="group border-l-2 border-accent-dim pl-4">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+          <div>
+            <h3 class="text-base font-semibold text-white">{role.company}</h3>
+            <p class="text-sm text-gray-400">{role.title}</p>
+          </div>
+          <span class="text-xs text-muted shrink-0">{role.period}</span>
+        </div>
+        {role.points.length === 1 ? (
+          <p class="mt-2 text-sm text-gray-400 leading-relaxed">{role.points[0]}</p>
+        ) : (
+          <ul class="mt-3 flex flex-col gap-1.5">
+            {role.points.map(point => (
+              <li class="text-sm text-gray-400 leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
+                {point}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

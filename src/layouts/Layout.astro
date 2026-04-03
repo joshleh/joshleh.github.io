@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Joshua Lee',
+	description = 'Data science and machine learning portfolio',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://joshleh.github.io" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-black text-gray-200 min-h-screen antialiased">
+		<slot />
+
+		<button
+			id="back-to-top"
+			aria-label="Back to top"
+			class="fixed bottom-6 right-6 z-50 hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-muted hover:text-white hover:border-border-hover transition-colors cursor-pointer"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M18 15l-6-6-6 6"/>
+			</svg>
+		</button>
+
+		<script>
+			const btn = document.getElementById('back-to-top')!;
+			window.addEventListener('scroll', () => {
+				btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+			});
+			btn.addEventListener('click', () => {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		</script>
+	</body>
+</html>

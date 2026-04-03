@@ -1,0 +1,94 @@
+---
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  repo?: string;
+  demo?: string;
+  website?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: 'Semiconductor Yield Fault Detection',
+    description:
+      'End-to-end fault detection pipeline on SECOM semiconductor manufacturing data.',
+    tags: ['PyTorch', 'scikit-learn', 'MLflow', 'FastAPI', 'SHAP'],
+    repo: 'https://github.com/joshleh/secom-fault-detection',
+  },
+  {
+    title: 'Explainable Medical AI for Pulmonary Edema Detection',
+    description:
+      'Built an explainable deep learning system using CNNs and a medical LLM to analyze chest X-rays and radiology reports for pulmonary edema detection.',
+    tags: ['PyTorch', 'Computer Vision', 'NLP', 'Grad-CAM'],
+    website: 'https://joshleh.github.io/dsc180b-project-website/',
+    
+  },
+  {
+    title: 'ISR Drone Deployment Trade Study',
+    description:
+      'Scenario-based operations analysis of ISR drone fleet deployment under cost, coverage, and persistence constraints.',
+    tags: ['Python', 'Monte Carlo', 'Optimization', 'Operations Research'],
+    repo: 'https://github.com/joshleh/isr-drone-deployment-trade-study',
+  },
+];
+---
+
+<section id="projects" class="max-w-2xl mx-auto px-6 py-16">
+  <h2 class="text-sm font-medium uppercase tracking-widest text-muted mb-10">
+    Projects
+  </h2>
+  <div class="flex flex-col gap-6">
+    {projects.map(project => (
+      <article class="group rounded-lg border border-border p-5 transition-colors hover:border-border-hover hover:bg-surface-raised">
+        <div class="flex items-start justify-between gap-4">
+          <h3 class="text-lg font-semibold text-white group-hover:text-accent transition-colors">
+            {project.title}
+          </h3>
+          <div class="flex shrink-0 gap-3 pt-1">
+            {project.repo && (
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-muted hover:text-accent transition-colors"
+              >
+                Code
+              </a>
+            )}
+            {project.website && (
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-muted hover:text-accent transition-colors"
+              >
+                Website
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-muted hover:text-accent transition-colors"
+              >
+                Demo
+              </a>
+            )}
+          </div>
+        </div>
+        <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+          {project.description}
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {project.tags.map(tag => (
+            <span class="rounded-full bg-white/5 px-2.5 py-0.5 text-xs text-gray-400">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

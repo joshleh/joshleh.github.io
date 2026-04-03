@@ -1,0 +1,27 @@
+---
+const links = [
+  { label: 'GitHub', href: 'https://github.com/joshleh' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/joshleh/' },
+  { label: 'Email', href: 'mailto:joshdmleh@gmail.com' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="max-w-2xl mx-auto px-6 py-16 border-t border-border">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <nav class="flex gap-5">
+      {links.map(link => (
+        <a
+          href={link.href}
+          target={link.href.startsWith('mailto') ? undefined : '_blank'}
+          rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+          class="text-sm text-muted hover:text-accent transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <span class="text-xs text-muted">&copy; {year} Joshua Lee</span>
+  </div>
+</footer>

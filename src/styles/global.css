@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #60a5fa;
+  --color-accent-dim: #2563eb;
+  --color-surface: #0a0a0a;
+  --color-surface-raised: #141414;
+  --color-border: #1e1e1e;
+  --color-border-hover: #333333;
+  --color-muted: #858585;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-accent-dim);
+  color: white;
+}
