@@ -10,6 +10,14 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'Edge-Deployable Keyword Spotter',
+    description:
+      'Edge-deployable 10-keyword spotter that compresses a DS-CNN to under 100 KB through INT8 quantization (PTQ and QAT), with sub-millisecond inference through ONNX Runtime.',
+    tags: ['PyTorch', 'ONNX Runtime', 'Quantization', 'Edge AI', 'Keyword Spotting'],
+    repo: 'https://github.com/joshleh/nano-kws',
+    demo: 'https://nano-kws.streamlit.app/',
+  },
+  {
     title: 'FusionTrack: Multi-Sensor UAV Tracking with EKF and Multi-Object Tracking',
     description:
       '2D UAV tracker that fuses radar and camera through an Extended Kalman Filter, with a Global Nearest-Neighbor tracker for crossing-target scenarios.',
