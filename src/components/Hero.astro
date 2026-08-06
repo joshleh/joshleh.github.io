@@ -16,7 +16,7 @@ const links = [
       class="w-24 h-24 rounded-full object-cover ring-2 ring-border"
     />
     <div>
-      <h1 class="text-5xl sm:text-6xl font-bold text-white tracking-tight">
+      <h1 class="text-5xl sm:text-6xl font-bold text-text tracking-tight">
         Joshua Lee
       </h1>
       <p class="mt-3 text-lg text-muted leading-relaxed max-w-lg">
@@ -30,7 +30,7 @@ const links = [
         href={link.href}
         target={link.href.startsWith('/') ? undefined : '_blank'}
         rel={link.href.startsWith('/') ? undefined : 'noopener noreferrer'}
-        class="text-sm text-accent hover:text-white transition-colors"
+        class="text-sm text-accent hover:text-text transition-colors"
       >
         {link.label}&nbsp;&rarr;
       </a>

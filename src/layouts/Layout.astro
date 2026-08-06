@@ -13,7 +13,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,14 +25,37 @@ const {
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://joshleh.github.io" />
 		<title>{title}</title>
+		<script is:inline>
+			(function () {
+				try {
+					if (localStorage.getItem('theme') === 'light') {
+						document.documentElement.classList.add('light');
+					}
+				} catch (e) {}
+			})();
+		</script>
 	</head>
-	<body class="bg-black text-gray-200 min-h-screen antialiased">
+	<body class="bg-bg text-text-secondary min-h-screen antialiased">
 		<slot />
+
+		<button
+			id="theme-toggle"
+			aria-label="Toggle light and dark mode"
+			class="fixed top-6 right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-muted hover:text-text hover:border-border-hover transition-colors cursor-pointer"
+		>
+			<svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+			</svg>
+			<svg id="theme-icon-sun" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="12" cy="12" r="4"/>
+				<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+			</svg>
+		</button>
 
 		<button
 			id="back-to-top"
 			aria-label="Back to top"
-			class="fixed bottom-6 right-6 z-50 hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-muted hover:text-white hover:border-border-hover transition-colors cursor-pointer"
+			class="fixed bottom-6 right-6 z-50 hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-raised text-muted hover:text-text hover:border-border-hover transition-colors cursor-pointer"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				<path d="M18 15l-6-6-6 6"/>
@@ -46,6 +69,27 @@ const {
 			});
 			btn.addEventListener('click', () => {
 				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+
+			const themeToggle = document.getElementById('theme-toggle')!;
+			const moonIcon = document.getElementById('theme-icon-moon')!;
+			const sunIcon = document.getElementById('theme-icon-sun')!;
+			const root = document.documentElement;
+
+			function syncIcons() {
+				const isLight = root.classList.contains('light');
+				moonIcon.classList.toggle('hidden', isLight);
+				sunIcon.classList.toggle('hidden', !isLight);
+			}
+
+			syncIcons();
+
+			themeToggle.addEventListener('click', () => {
+				const isLight = root.classList.toggle('light');
+				try {
+					localStorage.setItem('theme', isLight ? 'light' : 'dark');
+				} catch (e) {}
+				syncIcons();
 			});
 		</script>
 	</body>
