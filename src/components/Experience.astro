@@ -3,23 +3,25 @@ interface Position {
   title: string;
   period: string;
   points: string[];
+  current?: boolean;
 }
 
 interface Role {
   company: string;
-  period: string;
   positions: Position[];
 }
 
 const roles: Role[] = [
   {
     company: 'Skyworks Solutions',
-    period: 'Jan 2026 – Present',
     positions: [
       {
         title: 'Software Engineer',
         period: 'Jun 2026 – Present',
-        points: [],
+        points: [
+          'Building internal tooling for product engineering (MSB) & assisting in management of company websites.',
+        ],
+        current: true,
       },
       {
         title: 'Digital Analytics & Content Operations Co-op',
@@ -32,7 +34,6 @@ const roles: Role[] = [
   },
   {
     company: 'Industrial Technology Research Institute (ITRI)',
-    period: 'Jul 2025 – Aug 2025',
     positions: [
       {
         title: 'Data Analyst Intern',
@@ -45,7 +46,6 @@ const roles: Role[] = [
   },
   {
     company: 'The Floc App',
-    period: 'Jul 2025 – Aug 2025',
     positions: [
       {
         title: 'Data Science Intern',
@@ -58,7 +58,6 @@ const roles: Role[] = [
   },
   {
     company: 'Maxzone Auto Parts Corporation',
-    period: 'Jun 2024 – Sep 2024',
     positions: [
       {
         title: 'Data Engineering Intern',
@@ -71,7 +70,6 @@ const roles: Role[] = [
   },
   {
     company: 'Code Ninjas',
-    period: 'Jun 2021 – Jul 2021',
     positions: [
       {
         title: 'Coding Instructor',
@@ -92,56 +90,28 @@ const roles: Role[] = [
   <div class="flex flex-col gap-8">
     {roles.map(role => (
       <div class="group border-l-2 border-accent-dim pl-4">
-        {role.positions.length > 1 ? (
-          <>
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <h3 class="text-base font-semibold text-text">{role.company}</h3>
-              <span class="text-xs text-muted shrink-0">{role.period}</span>
-            </div>
-            <div class="mt-3 flex flex-col gap-4 border-l border-border-hover pl-4">
-              {role.positions.map(position => (
-                <div>
-                  <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                    <p class="text-sm font-medium text-text-secondary">{position.title}</p>
-                    <span class="text-xs text-muted shrink-0">{position.period}</span>
-                  </div>
-                  {position.points.length === 1 ? (
-                    <p class="mt-2 text-sm text-text-secondary leading-relaxed">{position.points[0]}</p>
-                  ) : position.points.length > 1 ? (
-                    <ul class="mt-3 flex flex-col gap-1.5">
-                      {position.points.map(point => (
-                        <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <>
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <div>
-                <h3 class="text-base font-semibold text-text">{role.company}</h3>
-                <p class="text-sm text-text-secondary">{role.positions[0].title}</p>
+        <h3 class="text-base font-semibold text-text">{role.company}</h3>
+        <div class={role.positions.length > 1 ? 'mt-3 flex flex-col gap-4' : 'mt-1.5 flex flex-col gap-4'}>
+          {role.positions.map(position => (
+            <div class={role.positions.length > 1 ? `border-l pl-4 ${position.current ? 'border-green-500' : 'border-border-hover'}` : ''}>
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <p class="text-sm font-semibold text-text">{position.title}</p>
+                <span class="text-xs text-muted shrink-0">{position.period}</span>
               </div>
-              <span class="text-xs text-muted shrink-0">{role.positions[0].period}</span>
+              {position.points.length === 1 ? (
+                <p class="mt-1.5 text-sm text-text-secondary leading-relaxed">{position.points[0]}</p>
+              ) : position.points.length > 1 ? (
+                <ul class="mt-1.5 flex flex-col gap-1.5">
+                  {position.points.map(point => (
+                    <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
-            {role.positions[0].points.length === 1 ? (
-              <p class="mt-2 text-sm text-text-secondary leading-relaxed">{role.positions[0].points[0]}</p>
-            ) : (
-              <ul class="mt-3 flex flex-col gap-1.5">
-                {role.positions[0].points.map(point => (
-                  <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
+          ))}
+        </div>
       </div>
     ))}
   </div>
