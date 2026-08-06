@@ -1,50 +1,85 @@
 ---
-interface Role {
-  company: string;
+interface Position {
   title: string;
   period: string;
   points: string[];
 }
 
+interface Role {
+  company: string;
+  period: string;
+  positions: Position[];
+}
+
 const roles: Role[] = [
   {
     company: 'Skyworks Solutions',
-    title: 'Digital Analytics & Content Operations Co-op',
     period: 'Jan 2026 – Present',
-    points: [
-      'Built a privacy-first analytics pipeline that generates 0-100 Content Performance Score (CPS) for Skyworks web pages using cookie-lite engagement metrics (scroll depth, dwell time, bounce, exit rate).',
+    positions: [
+      {
+        title: 'Software Engineer',
+        period: 'Jun 2026 – Present',
+        points: [],
+      },
+      {
+        title: 'Digital Analytics & Content Operations Co-op',
+        period: 'Jan 2026 – Jun 2026',
+        points: [
+          'Built a privacy-first analytics pipeline that generates 0-100 Content Performance Score (CPS) for Skyworks web pages using cookie-lite engagement metrics (scroll depth, dwell time, bounce, exit rate).',
+        ],
+      },
     ],
   },
   {
     company: 'Industrial Technology Research Institute (ITRI)',
-    title: 'Data Analyst Intern',
     period: 'Jul 2025 – Aug 2025',
-    points: [
-      'Designed an NLP pipeline for large-scale text data, including data cleaning, feature extraction, and structured signal generation.',
+    positions: [
+      {
+        title: 'Data Analyst Intern',
+        period: 'Jul 2025 – Aug 2025',
+        points: [
+          'Designed an NLP pipeline for large-scale text data, including data cleaning, feature extraction, and structured signal generation.',
+        ],
+      },
     ],
   },
   {
     company: 'The Floc App',
-    title: 'Data Science Intern',
     period: 'Jul 2025 – Aug 2025',
-    points: [
-      'Assisted in building iOS-based social matchmaking app for Gen Z users.',
+    positions: [
+      {
+        title: 'Data Science Intern',
+        period: 'Jul 2025 – Aug 2025',
+        points: [
+          'Assisted in building iOS-based social matchmaking app for Gen Z users.',
+        ],
+      },
     ],
   },
   {
     company: 'Maxzone Auto Parts Corporation',
-    title: 'Data Engineering Intern',
     period: 'Jun 2024 – Sep 2024',
-    points: [
-      'Automated reports and supported data operations across departments.',
+    positions: [
+      {
+        title: 'Data Engineering Intern',
+        period: 'Jun 2024 – Sep 2024',
+        points: [
+          'Automated reports and supported data operations across departments.',
+        ],
+      },
     ],
   },
   {
     company: 'Code Ninjas',
-    title: 'Coding Instructor',
     period: 'Jun 2021 – Jul 2021',
-    points: [
-      'Taught coding fundamentals and led a stop-motion animation workshop for students.',
+    positions: [
+      {
+        title: 'Coding Instructor',
+        period: 'Jun 2021 – Jul 2021',
+        points: [
+          'Taught coding fundamentals and led a stop-motion animation workshop for students.',
+        ],
+      },
     ],
   },
 ];
@@ -57,23 +92,55 @@ const roles: Role[] = [
   <div class="flex flex-col gap-8">
     {roles.map(role => (
       <div class="group border-l-2 border-accent-dim pl-4">
-        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-          <div>
-            <h3 class="text-base font-semibold text-text">{role.company}</h3>
-            <p class="text-sm text-text-secondary">{role.title}</p>
-          </div>
-          <span class="text-xs text-muted shrink-0">{role.period}</span>
-        </div>
-        {role.points.length === 1 ? (
-          <p class="mt-2 text-sm text-text-secondary leading-relaxed">{role.points[0]}</p>
+        {role.positions.length > 1 ? (
+          <>
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <h3 class="text-base font-semibold text-text">{role.company}</h3>
+              <span class="text-xs text-muted shrink-0">{role.period}</span>
+            </div>
+            <div class="mt-3 flex flex-col gap-4 border-l border-border-hover pl-4">
+              {role.positions.map(position => (
+                <div>
+                  <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <p class="text-sm font-medium text-text-secondary">{position.title}</p>
+                    <span class="text-xs text-muted shrink-0">{position.period}</span>
+                  </div>
+                  {position.points.length === 1 ? (
+                    <p class="mt-2 text-sm text-text-secondary leading-relaxed">{position.points[0]}</p>
+                  ) : position.points.length > 1 ? (
+                    <ul class="mt-3 flex flex-col gap-1.5">
+                      {position.points.map(point => (
+                        <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
-          <ul class="mt-3 flex flex-col gap-1.5">
-            {role.points.map(point => (
-              <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
-                {point}
-              </li>
-            ))}
-          </ul>
+          <>
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <div>
+                <h3 class="text-base font-semibold text-text">{role.company}</h3>
+                <p class="text-sm text-text-secondary">{role.positions[0].title}</p>
+              </div>
+              <span class="text-xs text-muted shrink-0">{role.positions[0].period}</span>
+            </div>
+            {role.positions[0].points.length === 1 ? (
+              <p class="mt-2 text-sm text-text-secondary leading-relaxed">{role.positions[0].points[0]}</p>
+            ) : (
+              <ul class="mt-3 flex flex-col gap-1.5">
+                {role.positions[0].points.map(point => (
+                  <li class="text-sm text-text-secondary leading-relaxed pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-border-hover">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </div>
     ))}
