@@ -1,17 +1,55 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #60a5fa;
-  --color-accent-dim: #2563eb;
-  --color-surface: #0a0a0a;
-  --color-surface-raised: #141414;
-  --color-border: #1e1e1e;
-  --color-border-hover: #333333;
-  --color-muted: #858585;
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-muted: var(--muted);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-chip: var(--chip);
+}
+
+/* Dark theme (default) */
+:root {
+  --accent: #60a5fa;
+  --accent-dim: #2563eb;
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-raised: #141414;
+  --border: #1e1e1e;
+  --border-hover: #333333;
+  --muted: #858585;
+  --text: #ffffff;
+  --text-secondary: #9ca3af;
+  --chip: rgb(255 255 255 / 5%);
+}
+
+/* Light theme, opt-in via .light class on <html> */
+:root.light {
+  --accent: #2563eb;
+  --accent-dim: #2563eb;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: #f4f4f5;
+  --border: #e4e4e7;
+  --border-hover: #d4d4d8;
+  --muted: #6b7280;
+  --text: #0a0a0a;
+  --text-secondary: #4b5563;
+  --chip: rgb(0 0 0 / 5%);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 ::selection {
