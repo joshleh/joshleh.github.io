@@ -3,6 +3,7 @@ interface Degree {
   school: string;
   degree: string;
   period: string;
+  current?: boolean;
 }
 
 const education: Degree[] = [
@@ -10,6 +11,7 @@ const education: Degree[] = [
     school: 'University of Southern California',
     degree: 'Master of Science, Applied Data Science',
     period: 'May 2026 – Dec 2027',
+    current: true,
   },
   {
     school: 'University of California, San Diego',
@@ -25,7 +27,7 @@ const education: Degree[] = [
   </h2>
   <div class="flex flex-col gap-8">
     {education.map(edu => (
-      <div class="border-l-2 border-accent-dim pl-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+      <div class={`border-l-2 pl-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 ${edu.current ? 'border-green-500' : 'border-accent-dim'}`}>
         <div>
           <h3 class="text-base font-semibold text-text">{edu.school}</h3>
           <p class="text-sm text-text-secondary">{edu.degree}</p>
