@@ -1,0 +1,20 @@
+---
+const links = [
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur-sm">
+  <nav class="max-w-2xl mx-auto px-6 py-3 flex justify-center gap-6">
+    {links.map(link => (
+      <a
+        href={link.href}
+        class="text-sm text-text-secondary hover:text-accent transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</header>
